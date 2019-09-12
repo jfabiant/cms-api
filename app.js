@@ -22,9 +22,10 @@ app.disable('x-powered-by');
 app.set('port', process.env.PORT);
 app.set('host', process.env.NODEJS_IP);
 
+const userController = require('./controllers/user');
 
 app.get('/api/v1.0', (req, res) => { res.json({ hello: 'CMS-API JS' }); });
-// app.post('/ms/bannerJS/v1.0/banner', bannerController.postBanner);
+app.post('/api/v1.0/user/signup', userController.postSignUpUser);
 
 /**
  * Initialize server
