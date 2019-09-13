@@ -20,7 +20,9 @@ exports.postSignUpUser = async (req, res) => {
             edad: req.body.age,
             direccion: req.body.address,
             fecha_nacimiento: req.body.birthdate,
-            email: req.body.email
+            email: req.body.email,
+            usuario: req.body.user,
+            password: req.body.password
         }
 
         log.info("##### EXECUTE QUERY #####");
