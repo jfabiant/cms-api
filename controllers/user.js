@@ -1,5 +1,6 @@
 const pool = require('../utils/database');
 const log = require('../utils/logger');
+const jwt = require('jsonwebtoken');
 
 exports.postSignUpUser = async (req, res) => {
     try {
@@ -12,29 +13,34 @@ exports.postSignUpUser = async (req, res) => {
         log.info("### BODY ###")
         console.log(req.body);
 
-        const new_user = {
-            login: req.body.login,
-            password: req.body.password
+        const new_person = {
+            nombres: req.body.names,
+            paterno: req.body.paternal,
+            materno: req.body.maternal,
+            edad: req.body.age,
+            direccion: req.body.address,
+            fecha_nacimiento: req.body.birthdate,
+            email: req.body.email
         }
 
-        // console.log("##### EXECUTE QUERY #####");
-        // const resQuery = await pool.query('INSERT INTO users SET ?', [new_user]);
-        // console.log(resQuery);
+        log.info("##### EXECUTE QUERY #####");
+        const resQuery = await pool.query('INSERT INTO persona SET ?', [new_person]);
+        console.log(resQuery);
 
-        // if (resQuery[0]) {
-        //     values = {
-        //         "codRes": "00",
-        //         "description": "User added successfully"
-        //     }
-        // } else {
-        //     values = {
-        //         "codRes": "01",
-        //         "description": "Error adding user"
-        //     }
-        // }
+        if (resQuery[0]) {
+            values = {
+                "codRes": "00",
+                "description": "Persona agregada satisfactoriamente"
+            }
+        } else {
+            values = {
+                "codRes": "01",
+                "description": "Error al agregar a la persona"
+            }
+        }
 
-        // console.log("##### RES JSON #####");
-        res.json({msg: "all ok"});
+        
+        res.json(values);
 
     } catch (e) {
         console.log(e);
