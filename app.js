@@ -26,6 +26,8 @@ const userController = require('./controllers/user');
 
 app.get('/api/v1.0', (req, res) => { res.json({ hello: 'CMS-API JS' }); });
 app.post('/api/v1.0/user/signup', userController.postSignUpUser);
+app.post('/api/v1.0/user/login', userController.postLogin);
+app.post('/api/v1.0/user/profile', userController.postProfile);
 
 /**
  * Initialize server
